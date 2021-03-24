@@ -7,16 +7,16 @@ import { colors} from '../../utils/color';
 
 
  const Focus = ({ addSubject }) => {           //props setFocusSubjet        
-    const [tmpItem, setTmpItem] = useState(null)
+    const [subject, setSubject] = useState(null)
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>What would you like to focus on ?</Text>
                 <View style={styles.inputContainer}>
                     <TextInput style={{flex : 1, marginRight : sizing.md}} onSubmitEditing={({nativeEvent}) => {
-                        setTmpItem(nativeEvent.text)
+                        setSubject(nativeEvent.text)
                     }}/>
-                    <RoundedButton title="+" size={50} onPress={() => addSubject(tmpItem)}/>
+                    <RoundedButton title="+" size={50} onPress={() => addSubject(subject)}/>
                 </View>
               
             </View>   

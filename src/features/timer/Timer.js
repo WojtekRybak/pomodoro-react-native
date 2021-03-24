@@ -11,7 +11,7 @@ import { useKeepAwake } from 'expo-keep-awake';
 
 const DEFAULT_TIME = 0.2;
 
-export const Timer = ({ focusSubject }) => {
+export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
     useKeepAwake()
     const [minutes,setMinutes] = useState(DEFAULT_TIME)
     const [isStarted,setIsStarted] = useState(false)
@@ -33,7 +33,8 @@ export const Timer = ({ focusSubject }) => {
         vibrate();
         setMinutes(DEFAULT_TIME);
         setProgress(1);
-        setIsStarted(false)
+        setIsStarted(false);
+        onTimerEnd();
 
     }
     const changeTime = (min) => {
@@ -60,8 +61,14 @@ export const Timer = ({ focusSubject }) => {
         </View>
         <View style={styles.buttonWrapper}>
             {isStarted ? (<RoundedButton title="pause" onPress={() => setIsStarted(false)}/>) :
-        (<RoundedButton title="start"  onPress={() => setIsStarted(true)}/>)}   
-        </View>  
+        (<RoundedButton title="start"  onPress={() => setIsStarted(true)}/>)}  
+           
+        </View> 
+             <View style={styles.clearSubject}>
+                <RoundedButton title='-' size={50} onPress={() => {
+                    clearSubject()
+                }}/>
+            </View>  
         </View>
     )
 }
@@ -92,5 +99,9 @@ const styles = StyleSheet.create({
        justifyContent : 'center',
        alignItems : 'center'
 
+    },
+    clearSubject : {
+        paddingBottom : 25,
+        paddingLeft : 25
     }
 })
